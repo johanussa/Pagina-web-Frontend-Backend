@@ -2,12 +2,18 @@
 
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 require('./database');
 
 // Configuracion para arranque del servidor
 app.set('port', process.env.PORT || 4000);
 
+app.get('/prueba', (req, res) => {
+    res.json("Backend Corriendo para Heroku")
+})
+
+app.use(cors({ origin: true }));
 app.use(morgan('dev')); // Modo desarrollador dev
 app.use(express.json()); // Datos en formato json
 app.use(express.urlencoded({extended:false}));
